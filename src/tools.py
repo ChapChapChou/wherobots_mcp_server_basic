@@ -120,9 +120,29 @@ def show_tables(catalog_name: str, database_name: str = "default"):
     except Exception as e:
         return {"error": f"Failed to fetch tables from {catalog_name}.{database_name}: {str(e)}"}
 
+def describe_table(catalog_name: str, database_name: str, table_name: str):
+    """
+    Describe a specific table in a catalog and database.
+    
+    Args:
+        catalog_name: Name of the catalog containing the table
+        database_name: Name of the database containing the table
+        table_name: Name of the table to describe
+    """
+    try:
+        with connect_to_wherobots() as conn:
+            curr = conn.cursor()
+            sql = f"DESCRIBE {catalog_name}.{database_name}.{table_name}"
+            curr.execute(sql)
+            results = curr.fetchall()
+            return {"catalog": catalog_name, "database": database_name, "table": table_name, "description": results.to_dict()}
+    except Exception as e:
+        return {"error": f"Failed to describe table {catalog_name}.{database_name}.{table_name}: {str(e)}"}
+
 
 def register_tools(mcp_instance):
     """Register all tools with the MCP instance."""
     mcp_instance.tool()(show_catalogs)
     mcp_instance.tool()(show_databases)
     mcp_instance.tool()(show_tables)
+    mcp_instance.tool()(describe_table)
