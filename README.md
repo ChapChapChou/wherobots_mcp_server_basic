@@ -17,7 +17,7 @@ A Model Context Protocol (MCP) server that provides access to Wherobots spatial 
 
 - Python 3.10 or higher
 - [uv](https://docs.astral.sh/uv/) package manager
-- 
+- [Wherobots-python-dbapi](https://docs.wherobots.com/latest/develop/spatial-sql-api/?h=sql+sessio#python-db-api-driver)
 - Wherobots API key
 - VS Code with GitHub Copilot extension
 
