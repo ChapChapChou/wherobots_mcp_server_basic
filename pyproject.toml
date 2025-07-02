@@ -1,0 +1,34 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wherobots-mcp-server"
+version = "0.1.0"
+description = "MCP server for Wherobots spatial data"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]",
+    "python-dotenv",
+    "wherobots-python-dbapi",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "isort"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wherobots_mcp_server"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
